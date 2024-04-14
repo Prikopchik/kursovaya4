@@ -5,9 +5,17 @@ class Vacancy:
         self.id = data['id']
         self.name = data['name']
         self.employer = data['employer']['name']
-        self.salary_from = data['salary']['from']
-        self.salary_to = data['salary']['to']
-        self.currency = data['salary']['currency']
+        
+        salary_data = data.get('salary')
+        if salary_data:
+            self.salary_from = salary_data.get('from')
+            self.salary_to = salary_data.get('to')
+            self.currency = salary_data.get('currency')
+        else:
+            self.salary_from = None
+            self.salary_to = None
+            self.currency = None
+        
         self.area = data['area']['name']
         self.requirement = data['snippet']['requirement']
         self.responsibility = data['snippet']['responsibility']
@@ -15,16 +23,3 @@ class Vacancy:
 
     def __repr__(self):
         return f"Vacancy(title='{self.title}', salary='{self.salary}')"
-
-    def load_vacancies_from_json(file_path):
-        with open(file_path, 'r') as file:
-            data = json.load(file)
-            return [Vacancy(item) for item in data['items']]
-
-    file_path = 'data/vacancies.json'
-    vacancies_list = load_vacancies_from_json(file_path)
-
-    def compare_salary(self, other):
-        if not self.salary.isdigit() or not other.salary.isdigit():
-            return 0
-        return int(self.salary) - int(other.salary)
