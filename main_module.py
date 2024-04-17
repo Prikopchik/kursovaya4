@@ -1,10 +1,14 @@
-import head_hunter_api as head_hunter_api
+import src.head_hunter_api as head_hunter_api
 from src.vacancy import Vacancy  
-from functions_module import sort_vacancies, get_top_vacancies, get_vacancies_by_salary, filter_vacancies, print_vacancies
+from src.api_client import APIClient
+from src.functions_module import sort_vacancies, get_top_vacancies, get_vacancies_by_salary, filter_vacancies, print_vacancies
+from src.json_saver import JSONSaver
 
 def main():
     try:
-        hh_api = head_hunter_api.HeadHunterAPI()
+        api_client = APIClient()
+        json_saver = JSONSaver("data/vacancies.json")
+        hh_api = head_hunter_api.HeadHunterAPI(api_client, json_saver)
 
         search_query = input("Введите поисковый запрос: ")
         hh_vacancies = hh_api.get_vacancies(search_query)
