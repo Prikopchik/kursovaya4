@@ -1,10 +1,10 @@
-import src.HeadHunterAPI as HeadHunterAPI
-from src.Vacancy import Vacancy  
-from src.functions import sort_vacancies, get_top_vacancies, get_vacancies_by_salary, filter_vacancies, print_vacancies
+import head_hunter_api as head_hunter_api
+from src.vacancy import Vacancy  
+from functions_module import sort_vacancies, get_top_vacancies, get_vacancies_by_salary, filter_vacancies, print_vacancies
 
 def main():
     try:
-        hh_api = HeadHunterAPI.HeadHunterAPI()
+        hh_api = head_hunter_api.HeadHunterAPI()
 
         search_query = input("Введите поисковый запрос: ")
         hh_vacancies = hh_api.get_vacancies(search_query)

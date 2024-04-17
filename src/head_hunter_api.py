@@ -1,19 +1,16 @@
 import requests
 import json
-from src.VacancyAPI import VacancyAPI
+from vacancy_api import VacancyAPI
 
 class HeadHunterAPI(VacancyAPI):
+    def __init__(self, api_client, json_saver):
+        self.api_client = api_client
+        self.json_saver = json_saver
+
     def get_vacancies(self, search_query):
-        url = f"https://api.hh.ru/vacancies?text={search_query}"
-        try:
-            response = requests.get(url)
-            response.raise_for_status() 
-            vacancies_data = response.json()['items']
-            self.save_vacancies_to_json(vacancies_data, "data/vacancies.json")
-            return vacancies_data
-        except requests.RequestException as e:
-            print("Ошибка при получении данных:", e)
-            return []
+        vacancies_data = self.api_client.get_vacancies(search_query)
+        self.json_saver.save_vacancies_to_json(vacancies_data, "data/vacancies.json")
+        return vacancies_data
 
     def add_vacancy(self, vacancy_data, file_path):
         try:

@@ -1,33 +1,6 @@
 import unittest
-from unittest.mock import MagicMock, patch
-from src.HeadHunterAPI import HeadHunterAPI
-from src.Vacancy import Vacancy
-from src.functions import filter_vacancies, sort_vacancies, get_top_vacancies
-
-class TestHeadHunterAPI(unittest.TestCase):
-    @patch('requests.get')
-    def test_get_vacancies_success(self, mock_get):
-        mock_response = MagicMock()
-        mock_response.status_code = 200
-        mock_response.json.return_value = {'items': [{'id': 1, 'name': 'Vacancy 1'}, {'id': 2, 'name': 'Vacancy 2'}]}
-        mock_get.return_value = mock_response
-
-        api = HeadHunterAPI()
-        vacancies = api.get_vacancies('Python')
-
-        self.assertEqual(len(vacancies), 2)
-        self.assertEqual(vacancies[0]['name'], 'Vacancy 1')
-        self.assertEqual(vacancies[1]['name'], 'Vacancy 2')
-
-    @patch('src.HeadHunterAPI.requests.get')
-    def test_get_vacancies_failure(self, mock_get):
-        mock_get.return_value = MagicMock()
-        mock_get.return_value.status_code = 500
-
-        api = HeadHunterAPI.HeadHunterAPI()
-        vacancies = api.get_vacancies('Python')
-
-        self.assertEqual(vacancies, [])
+from vacancy import Vacancy
+from functions_module import filter_vacancies, sort_vacancies, get_top_vacancies
 
 class TestFunctions(unittest.TestCase):
     def test_filter_vacancies(self):

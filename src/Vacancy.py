@@ -20,4 +20,5 @@ class Vacancy:
         self.published_at = data['published_at']
 
     def __repr__(self):
-        return f"Vacancy(title='{self.title}', salary='{self.salary}')"
+        return f"Vacancy(title='{self.name}', salary_from='{self.salary_from}', salary_to='{self.salary_to}', currency='{self.currency}')"
+
