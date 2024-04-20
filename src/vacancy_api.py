@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from vacancy import Vacancy
+from .vacancy import Vacancy
 
 class VacancyAPI(ABC):
     @abstractmethod

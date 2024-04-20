@@ -1,4 +1,4 @@
-import src.head_hunter_api as head_hunter_api
+import src.head_hunter_api as HHApiClient
 from src.vacancy import Vacancy  
 from src.api_client import APIClient
 from src.functions_module import sort_vacancies, get_top_vacancies, get_vacancies_by_salary, filter_vacancies, print_vacancies
@@ -6,13 +6,10 @@ from src.json_saver import JSONSaver
 
 def main():
     try:
-        api_client = APIClient()
-        json_saver = JSONSaver("data/vacancies.json")
-        hh_api = head_hunter_api.HeadHunterAPI(api_client, json_saver)
-
+        hh_api_client = HHApiClient()
         search_query = input("Введите поисковый запрос: ")
-        hh_vacancies = hh_api.get_vacancies(search_query)
-        vacancies_list = [Vacancy(vacancy) for vacancy in hh_vacancies]  
+        hh_vacancies = hh_api_client.get_vacancies(search_query)
+        vacancies_list = [Vacancy(vacancy) for vacancy in hh_vacancies] 
 
         top_n = int(input("Введите количество вакансий для вывода: "))
         filter_words = input("Введите ключевые слова для фильтрации вакансий: ").split()

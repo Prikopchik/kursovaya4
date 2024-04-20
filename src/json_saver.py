@@ -1,10 +1,12 @@
 import json
+from data_saver_loader import DataSaverLoader
 
-class JSONSaver:
+
+class JSONSaver(DataSaverLoader):
     def __init__(self, filename):
         self.filename = filename
 
-    def save_vacancies_to_json(self, vacancies_data, file_path):
+    def save_vacancies_to_json(self, vacancies_data, file_path) -> None:
         try:
             with open(file_path, 'w') as file:
                 json.dump(vacancies_data, file, indent=4)
