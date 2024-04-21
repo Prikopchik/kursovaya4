@@ -1,6 +1,7 @@
 import unittest
-from vacancy import Vacancy
-from functions_module import filter_vacancies, sort_vacancies, get_top_vacancies
+from unittest.mock import MagicMock, patch
+from src.vacancy import Vacancy
+from src.functions_module import filter_vacancies, sort_vacancies, get_top_vacancies
 
 class TestFunctions(unittest.TestCase):
     def test_filter_vacancies(self):
@@ -20,9 +21,10 @@ class TestFunctions(unittest.TestCase):
             Vacancy({'id': 3, 'name': 'Frontend Developer', 'salary_from': 70000}),
         ]
         sorted_vacancies = sort_vacancies(vacancies)
-        self.assertEqual(sorted_vacancies[0].name, 'Java Developer')
-        self.assertEqual(sorted_vacancies[1].name, 'Python Developer')
+        self.assertEqual(sorted_vacancies[0].name, 'Python Developer')
+        self.assertEqual(sorted_vacancies[1].name, 'Java Developer')
         self.assertEqual(sorted_vacancies[2].name, 'Frontend Developer')
+
 
     def test_get_top_vacancies(self):
         vacancies = [

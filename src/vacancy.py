@@ -1,8 +1,8 @@
 class Vacancy:
     def __init__(self, data):
-        self.id = data['id']
-        self.name = data['name']
-        self.employer = data['employer']['name']
+        self.id = data.get('id')
+        self.name = data.get('name')
+        self.employer = data.get('employer', {}).get('name')
         
         salary_data = data.get('salary')
         if salary_data:
@@ -14,10 +14,10 @@ class Vacancy:
             self.salary_to = None
             self.currency = None
         
-        self.area = data['area']['name']
-        self.requirement = data['snippet']['requirement']
-        self.responsibility = data['snippet']['responsibility']
-        self.published_at = data['published_at']
+        self.area = data.get('area', {}).get('name')
+        self.requirement = data.get('snippet', {}).get('requirement')
+        self.responsibility = data.get('snippet', {}).get('responsibility')
+        self.published_at = data.get('published_at')
 
     def __repr__(self):
         return f"Vacancy(title='{self.name}', salary_from='{self.salary_from}', salary_to='{self.salary_to}', currency='{self.currency}')"

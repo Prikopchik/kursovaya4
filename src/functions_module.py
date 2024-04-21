@@ -2,13 +2,9 @@ def filter_vacancies(vacancies, keywords):
     if not keywords:  
         return vacancies
 
-    filtered_vacancies = []
-    for vacancy in vacancies:
-        for keyword in keywords:
-            if keyword.lower() in vacancy.name.lower() or keyword.lower() in vacancy.requirement.lower():
-                filtered_vacancies.append(vacancy)
-                break
-    return filtered_vacancies
+    return [vacancy for vacancy in vacancies if any(keyword.lower() in (vacancy.name or '').lower() or 
+                                                    keyword.lower() in (vacancy.requirement or '').lower() 
+                                                    for keyword in keywords)]
 
 
 def get_vacancies_by_salary(vacancies, salary_range):
