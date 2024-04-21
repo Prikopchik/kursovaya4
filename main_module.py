@@ -1,21 +1,22 @@
 from src.head_hunter_api import HHApiClient
 from src.vacancy import Vacancy  
-from src.api_client import APIClient
 from src.functions_module import sort_vacancies, get_top_vacancies, get_vacancies_by_salary, filter_vacancies, print_vacancies
-from src.json_saver import JSONSaver
 from src.superjob_api_client import SuperJobApiClient
+import traceback
+
 
 def main():
     try:
         hh_api_client = HHApiClient()
-        sj_api_client = SuperJobApiClient()
+        #sj_api_client = SuperJobApiClient()
 
         search_query = input("Введите поисковый запрос: ")
         hh_vacancies = hh_api_client.get_vacancies(search_query)
         #sj_vacancies = sj_api_client.get_vacancies(search_query)
+        vacancies_list = hh_vacancies
 
-        vacancies_list = [
-            Vacancy(vacancy) for vacancy in hh_vacancies] #+sj_vacancies
+        #vacancies_list = [
+        #    Vacancy(vacancy) for vacancy in hh_vacancies] #+sj_vacancies
         
 
         top_n = int(input("Введите количество вакансий для вывода: "))
@@ -29,5 +30,6 @@ def main():
         print_vacancies(top_vacancies)
     except Exception as e:
         print("Произошла ошибка:", e)
+        print(traceback.format_exc())
 if __name__ == "__main__":
     main()
