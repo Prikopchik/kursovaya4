@@ -12,11 +12,11 @@ def main():
 
         search_query = input("Введите поисковый запрос: ")
         hh_vacancies = hh_api_client.get_vacancies(search_query)
-        sj_vacancies = sj_api_client.get_vacancies(search_query)
+        #sj_vacancies = sj_api_client.get_vacancies(search_query)
 
         vacancies_list = [
-            Vacancy(vacancy) for vacancy in hh_vacancies + sj_vacancies
-        ]
+            Vacancy(vacancy) for vacancy in hh_vacancies] #+sj_vacancies
+        
 
         top_n = int(input("Введите количество вакансий для вывода: "))
         filter_words = input("Введите ключевые слова для фильтрации вакансий: ").split()
